@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>B站内容管理后台</title>
+    <!-- 引入LayuiCSS -->
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body>
+<blockquote class="layui-elem-quote">B站内容管理后台</blockquote>
+<!--layui-row代表起一个新行-->
+<div class="layui-row">
+    <!-- layui表单 -->
+    <form class="layui-form">
+<!--        &lt;!&ndash; layui-inline 在一个行中显示多个div &ndash;&gt;-->
+<!--        <div class="layui-inline" style="width: 150px">-->
+<!--            <select name="channel" id="channel" lay-filter="channel">-->
+<!--                <option value="-1">全部频道</option>-->
+<!--                <option value="1">推荐</option>-->
+<!--                <option value="2">视频</option>-->
+<!--                <option value="3">图片</option>-->
+<!--                <option value="4">笑话</option>-->
+<!--                <option value="5">排行</option>-->
+<!--            </select>-->
+<!--        </div>-->
+
+        <div class="layui-inline" style="width: 150px">
+            <select name="contentType" id="contentType" lay-filter="contentType">
+                <option value="-1">全部主题</option>
+                <option value="1">视频</option>
+                <option value="2">直播</option>
+                <option value="3">番剧</option>
+                <option value="4">文章</option>
+                <option value="5">其他</option>
+            </select>
+        </div>
+
+        <div class="layui-inline">
+            <div class="layui-input-inline" style="width: 200px">
+                <input type="text" id="keyword" name="keyword" placeholder="请输入要查询的关键字" autocomplete="off" class="layui-input">
+            </div>
+            <a href="javascript:void(0)" id="btnQuery" class="layui-btn">查询</a>
+        </div>
+
+    </form>
+</div>
+<!--
+    layui-table 代表是一个表格
+    url : ajax获取数据的地址
+    page : 自动生成分页栏
+    height:auto 表格高度随着内容自适应
+    lay-filter相当于layui自己使用的ID
+-->
+
+<table class="layui-table" lay-data="{url:'/list' , page:true , id:'grdContent', height : 'auto' , done : doneRefresh,initSort: {field:'t_chatnum', type:'desc'}}" lay-filter="grdContent">
+    <thead>
+    <tr>
+        <th lay-data="{field:'content_id' , width:150 , sort : true,align: 'center'}">ID</th>
+        <th lay-data="{field:'type_name' , width:100,align: 'center' }">类型</th>
+        <th lay-data="{field:'up_name' , width:100 ,align: 'center'}">up主</th>
+        <th lay-data="{field:'t_title' , width:180,align: 'center' }">标题</th>
+        <th lay-data="{field:'t_url' , width:160,align: 'center' }">地址</th>
+        <th lay-data="{field:'t_rname' , width:132,align: 'center' }">圈子</th>
+        <th lay-data="{field:'t_tname' , width:100 ,align: 'center'}">主题</th>
+        <th lay-data="{field:'t_playnum' , width:100, sort: true,align: 'center' }">播放量</th>
+        <th lay-data="{field:'t_chatnum' , width:100,sort: true,align: 'center'}">弹幕数</th>
+        <th lay-data="{field:'t_longtime' , width:100,align: 'center' }">时长</th>
+        <th lay-data="{field:'t_rcmd_reason' , width:100 ,align: 'center'}">推荐原因</th>
+        <!--templet使用指定的选择器组件的内容渲染单元格-->
+        <th lay-data="{field:'op' , width:100 ,templet:'#op',align: 'center'}">操作</th>
+    </tr>
+    </thead>
+</table>
+<div id="op" style="display: none">
+    <div>
+        <button class="layui-btn layui-btn-normal layui-btn-xs " name="btnPreview" t-url = "{{d.t_url}}">预览</button>
+        <button class="layui-btn layui-btn-danger layui-btn-xs " name="btnDelete" content-id = "{{d.content_id}}">删除</button>
+    </div>
+</div>
+<!-- 利用JS初始化上面的table组件 -->
+<script src="/layui/layui.js" type="text/javascript"></script>
+<script>
+    var $ ;
+    var layer ;
+    var table ;
+    //初始组件
+    //按模块初始化相应组件 layer代表布局组件 ,element代表表单项与常用元素  table 代表数据表格模块, form代表表单模块
+    layui.use(["layer" , "element" , "table" , "form"] , function(){
+        //$就是jquery ，layui自动内嵌了jquery，layui.$相当于获取了jquery对象
+        $ = layui.$;
+        //获取layui的table模块对象
+        table = layui.table;
+        layer = layui.layer;
+        //查询时间
+        $("#btnQuery").click(function(){
+            //在我们使用旧版本，获取下拉框value的时候val()方法是无效的。
+            //我们使用的当前版本修正了这个bug
+            // var channelId = $("#channel").val();
+            var typeid = $("#contentType").val();
+            var keyword = $("#keyword").val();
+            table.reload("grdContent" , {
+                url : "/list" ,
+                where : {
+                    "typeid" : typeid,
+                    "keyword" : keyword
+                }
+            })
+        });
+
+    })
+
+
+    function doneRefresh(){
+        $("button[name='btnDelete']").click(function(){
+            //attr用于获取或设置元素的指定属性
+            //$(this)代表当前事件产生的对象
+            var contentId = $(this).attr("content-id");
+            $.ajax({
+                url : "/delete" ,
+                data : {"contentId" :contentId} ,
+                dataType : "json" ,
+                success : function(json){
+                    console.log(json);
+                    layer.msg(json.msg , {
+                        icon : 1 , //图标
+                        offset : '200px' ,//对话框距离页面上边距200px
+                        time : 2000 //两秒后自动关闭
+                    })
+                    table.reload("grdContent");
+                }
+            })
+        })
+
+        //绑定预览按钮
+            $("button[name='btnPreview']").click(function(){
+                var url = $(this).attr("t-url");
+                window.open(url);
+            })
+
+
+    }
+
+</script>
+</body>
+</html>

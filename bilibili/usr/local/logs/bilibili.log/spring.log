@@ -1,0 +1,14 @@
+2020-06-27 12:10:14.656  INFO 31266 --- [main] c.j.bilibili.BilibiliApplicationTests    : Starting BilibiliApplicationTests on MacBook-Pro.local with PID 31266 (started by yangjl in /Users/yangjl/Desktop/javacode/bilibili)
+2020-06-27 12:10:14.657  INFO 31266 --- [main] c.j.bilibili.BilibiliApplicationTests    : The following profiles are active: prd
+2020-06-27 12:10:16.592  INFO 31266 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-27 12:10:17.008  INFO 31266 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-06-27 12:10:17.067  INFO 31266 --- [main] c.j.bilibili.BilibiliApplicationTests    : Started BilibiliApplicationTests in 2.763 seconds (JVM running for 3.764)
+2020-06-27 12:10:17.281  INFO 31266 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2020-06-27 12:10:17.282  INFO 31266 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-06-27 16:51:12.179  INFO 33246 --- [main] c.j.bilibili.BilibiliApplicationTests    : Starting BilibiliApplicationTests on MacBook-Pro.local with PID 33246 (started by yangjl in /Users/yangjl/Desktop/javacode/bilibili)
+2020-06-27 16:51:12.181  INFO 33246 --- [main] c.j.bilibili.BilibiliApplicationTests    : The following profiles are active: prd
+2020-06-27 16:51:14.325  INFO 33246 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-27 16:51:14.820  INFO 33246 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-06-27 16:51:14.893  INFO 33246 --- [main] c.j.bilibili.BilibiliApplicationTests    : Started BilibiliApplicationTests in 3.189 seconds (JVM running for 4.596)
+2020-06-27 16:51:15.268  INFO 33246 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2020-06-27 16:51:15.270  INFO 33246 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'

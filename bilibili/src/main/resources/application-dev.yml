@@ -1,0 +1,16 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://49.232.146.180:1201/BiliBli
+    username: root
+    password: 123qwe
+  thymeleaf:
+    cache: true
+
+##将mapper级别热日志最低级别调整为debug
+#logging:
+#  level:
+#    com.jinxiu123.bilibili.mapper: debug
+server:
+  port: 80

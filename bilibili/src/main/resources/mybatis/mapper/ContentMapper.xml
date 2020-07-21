@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinxiu123.bilibili.mapper.ContentMapper">
+  <resultMap id="BaseResultMap" type="com.jinxiu123.bilibili.enity.Content">
+    <id column="content_id" jdbcType="INTEGER" property="contentId" />
+    <result column="type_id" jdbcType="BIGINT" property="typeId" />
+    <result column="up_id" jdbcType="BIGINT" property="upId" />
+    <result column="up_name" jdbcType="VARCHAR" property="upName" />
+    <result column="t_title" jdbcType="VARCHAR" property="tTitle" />
+    <result column="t_url" jdbcType="VARCHAR" property="tUrl" />
+    <result column="t_rname" jdbcType="VARCHAR" property="tRname" />
+    <result column="t_tname" jdbcType="VARCHAR" property="tTname" />
+    <result column="t_playnum" jdbcType="VARCHAR" property="tPlaynum" />
+    <result column="t_chatnum" jdbcType="VARCHAR" property="tChatnum" />
+    <result column="t_longtime" jdbcType="VARCHAR" property="tLongtime" />
+    <result column="t_rcmd_reason" jdbcType="VARCHAR" property="tRcmdReason" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    content_id, type_id, up_id, up_name, t_title, t_url, t_rname, t_tname,
+    t_playnum, t_chatnum, t_longtime, t_rcmd_reason
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BL_content
+    where content_id = #{contentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from BL_content
+    where content_id = #{contentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jinxiu123.bilibili.enity.Content">
+    insert into BL_content (content_id, type_id,
+      up_id, up_name, t_title, 
+      t_url, t_rname, t_tname, 
+      t_playnum, t_chatnum, t_longtime, 
+      t_rcmd_reason)
+    values (#{contentId,jdbcType=INTEGER}, #{typeId,jdbcType=BIGINT},
+      #{upId,jdbcType=BIGINT}, #{upName,jdbcType=VARCHAR}, #{tTitle,jdbcType=VARCHAR}, 
+      #{tUrl,jdbcType=VARCHAR}, #{tRname,jdbcType=VARCHAR}, #{tTname,jdbcType=VARCHAR}, 
+      #{tPlaynum,jdbcType=VARCHAR}, #{tChatnum,jdbcType=VARCHAR}, #{tLongtime,jdbcType=VARCHAR}, 
+      #{tRcmdReason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinxiu123.bilibili.enity.Content">
+    insert into BL_content
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contentId != null">
+        content_id,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="upId != null">
+        up_id,
+      </if>
+      <if test="upName != null">
+        up_name,
+      </if>
+      <if test="tTitle != null">
+        t_title,
+      </if>
+      <if test="tUrl != null">
+        t_url,
+      </if>
+      <if test="tRname != null">
+        t_rname,
+      </if>
+      <if test="tTname != null">
+        t_tname,
+      </if>
+      <if test="tPlaynum != null">
+        t_playnum,
+      </if>
+      <if test="tChatnum != null">
+        t_chatnum,
+      </if>
+      <if test="tLongtime != null">
+        t_longtime,
+      </if>
+      <if test="tRcmdReason != null">
+        t_rcmd_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contentId != null">
+        #{contentId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="upId != null">
+        #{upId,jdbcType=BIGINT},
+      </if>
+      <if test="upName != null">
+        #{upName,jdbcType=VARCHAR},
+      </if>
+      <if test="tTitle != null">
+        #{tTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tUrl != null">
+        #{tUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="tRname != null">
+        #{tRname,jdbcType=VARCHAR},
+      </if>
+      <if test="tTname != null">
+        #{tTname,jdbcType=VARCHAR},
+      </if>
+      <if test="tPlaynum != null">
+        #{tPlaynum,jdbcType=VARCHAR},
+      </if>
+      <if test="tChatnum != null">
+        #{tChatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="tLongtime != null">
+        #{tLongtime,jdbcType=VARCHAR},
+      </if>
+      <if test="tRcmdReason != null">
+        #{tRcmdReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinxiu123.bilibili.enity.Content">
+    update BL_content
+    <set>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="imageId != null">
+        image_id = #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="upId != null">
+        up_id = #{upId,jdbcType=BIGINT},
+      </if>
+      <if test="upName != null">
+        up_name = #{upName,jdbcType=VARCHAR},
+      </if>
+      <if test="tTitle != null">
+        t_title = #{tTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tUrl != null">
+        t_url = #{tUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="tRname != null">
+        t_rname = #{tRname,jdbcType=VARCHAR},
+      </if>
+      <if test="tTname != null">
+        t_tname = #{tTname,jdbcType=VARCHAR},
+      </if>
+      <if test="tPlaynum != null">
+        t_playnum = #{tPlaynum,jdbcType=VARCHAR},
+      </if>
+      <if test="tChatnum != null">
+        t_chatnum = #{tChatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="tLongtime != null">
+        t_longtime = #{tLongtime,jdbcType=VARCHAR},
+      </if>
+      <if test="tRcmdReason != null">
+        t_rcmd_reason = #{tRcmdReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where content_id = #{contentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinxiu123.bilibili.enity.Content">
+    update BL_content
+    set type_id = #{typeId,jdbcType=BIGINT},
+      image_id = #{imageId,jdbcType=INTEGER},
+      up_id = #{upId,jdbcType=BIGINT},
+      up_name = #{upName,jdbcType=VARCHAR},
+      t_title = #{tTitle,jdbcType=VARCHAR},
+      t_url = #{tUrl,jdbcType=VARCHAR},
+      t_rname = #{tRname,jdbcType=VARCHAR},
+      t_tname = #{tTname,jdbcType=VARCHAR},
+      t_playnum = #{tPlaynum,jdbcType=VARCHAR},
+      t_chatnum = #{tChatnum,jdbcType=VARCHAR},
+      t_longtime = #{tLongtime,jdbcType=VARCHAR},
+      t_rcmd_reason = #{tRcmdReason,jdbcType=VARCHAR}
+    where content_id = #{contentId,jdbcType=INTEGER}
+  </update>
+  <select id="findparams" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    select bc.*,bt.type_name  from BL_content bc ,BL_type bt where bc.`type_id`=bt.`type_id`
+    <if test="typeid!=null">
+      and bc.type_id=#{typeid}
+    </if>
+    <if test="keyword!=null">
+    and t_title like #{keyword}
+    </if>
+  </select>
+</mapper>
