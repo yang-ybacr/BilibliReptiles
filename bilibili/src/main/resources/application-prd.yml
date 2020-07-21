@@ -2,9 +2,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://49.232.146.180:1201/BiliBli
-    username: root
-    password: 123qwe
+    url: jdbc:mysql://*******/BiliBli
+    username: *****
+    password: *****
   thymeleaf:
     cache: true
 
@@ -13,4 +13,4 @@ logging:
   file:
     path: /usr/local/logs/bilibili.log
 server:
-  port: 9012
+  port: ****
